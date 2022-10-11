@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'ABMagicDeeplink', '~> 1.0.6'
   spec.script_phases = [
     { :name => 'Precompile',
-      :script => '${PODS_TARGET_SRCROOT}/.MagicDeeplinkConfig/.startup.sh',
+      :script => '${PODS_TARGET_SRCROOT}/MagicDeepLinkTestModule/.MagicDeeplinkConfig/.startup.sh',
       :execution_position => :before_compile
     }
   ]
