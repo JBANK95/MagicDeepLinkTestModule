@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TEST</key>
+	<dict/>
+	<key>testPushSection</key>
+	<string>MagicDeepLinkTestUIViewController</string>
+	<key>EXAMPLE_ROUTER1</key>
+	<dict>
+		<key>testDeepLinkPushSection</key>
+		<string>MyViewController</string>
+	</dict>
+	<key>EXAMPLE_ROUTER2</key>
+	<dict>
+		<key>examplePushSectionWithParameters</key>
+		<dict>
+			<key>className</key>
+			<string>exampleUIViewController</string>
+			<key>parameter1</key>
+			<string>value1</string>
+			<key>parameter2</key>
+			<string>value2</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -12,7 +12,7 @@ import pathlib
 class DeepLinkingCompliance:
     def __init__(self):
         self.temporaryFileStorePath = ".MagicDeeplinkConfig/AddedNewSwiftFilesList.txt"
-       # self.compliantViewControllerNames = []
+        self.compliantViewControllerNames = []
         
        # self.getAddedSwiftFilesOnProject()
        # self.checkFilesForViewControllers()
