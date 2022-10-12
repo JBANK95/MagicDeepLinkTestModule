@@ -1,0 +1,14 @@
+final class SchedJoulesSDK {
+    static let resourceBundle: Bundle = {
+        let myBundle = Bundle(for: SchedJoulesSDK.self)
+
+        guard let resourceBundleURL = myBundle.url(
+            forResource: "MySDK", withExtension: "bundle")
+            else { fatalError("MySDK.bundle not found!") }
+
+        guard let resourceBundle = Bundle(url: resourceBundleURL)
+            else { fatalError("Cannot access MySDK.bundle!") }
+
+        return resourceBundle
+    }()
+}
