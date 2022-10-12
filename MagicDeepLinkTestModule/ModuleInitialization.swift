@@ -1,6 +1,6 @@
 
 
-
+// Add to every module that's part of deep linking so 
 public final class MagicDeepLinkTestModuleBundle {
     public static let resourceBundle: Bundle = {
         let myBundle = Bundle(for: MagicDeepLinkTestModuleBundle.self)
@@ -14,5 +14,15 @@ public final class MagicDeepLinkTestModuleBundle {
 
         return resourceBundle
     }()
+
+     public static func getModuleRoutes() -> NSMutableDictionary? {
+        let moduleBundle = MagicDeepLinkTestModuleBundle.resourceBundle
+        if let plistRouteFile = moduleBundle.path(forResource: "DeepLinkingPushSectionMapping", ofType: "plist") {
+            print(NSMutableDictionary(contentsOfFile: plistRouteFile))
+            return NSMutableDictionary(contentsOfFile: plistRouteFile)
+        }
+        
+        return nil
+    }
     
 }
