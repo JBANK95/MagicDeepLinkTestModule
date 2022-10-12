@@ -18,4 +18,5 @@ Pod::Spec.new do |spec|
     }
   ]
   spec.resource_bundles = {'MagicDeepLinkTestModuleBundle' => ['${PODS_TARGET_SRCROOT}/MagicDeepLinkTestModule/DeepLinkingPushSectionMapping.plist'] }
+
 end
