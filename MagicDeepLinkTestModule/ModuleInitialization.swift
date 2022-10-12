@@ -1,8 +1,8 @@
 
 
 
-final class MagicDeepLinkTestModuleBundle {
-    static let resourceBundle: Bundle = {
+public final class MagicDeepLinkTestModuleBundle {
+    public static let resourceBundle: Bundle = {
         let myBundle = Bundle(for: MagicDeepLinkTestModuleBundle.self)
 
         guard let resourceBundleURL = myBundle.url(
