@@ -4,14 +4,17 @@
 <dict>
 	<key>TEST</key>
 	<dict/>
-	<key>testPushSection</key>
-	<string>MagicDeepLinkTestUIViewController</string>
+	<key>MAIN_ROUTER</key>
+	<dict>
+                <key>developmentPushSection</key>
+                <string>MyViewController</string>
+        </dict>
 	<key>EXAMPLE_ROUTER1</key>
 	<dict>
 		<key>testDeepLinkPushSection</key>
 		<string>MyViewController</string>
 	</dict>
-	<key>EXAMPLE_ROUTER2</key>
+	<key>EXAMPLE_ROUTER_WITH_PARAMETERS</key>
 	<dict>
 		<key>examplePushSectionWithParameters</key>
 		<dict>

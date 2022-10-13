@@ -1,6 +1,7 @@
 
 
-// Add to every module that's part of deep linking so 
+// Add to every module that's part of deep linking wherever the configuration or initialization is done
+// this will permit external classes to access underlying bundle resources.
 public final class MagicDeepLinkTestModuleBundle {
     public static let resourceBundle: Bundle = {
         let myBundle = Bundle(for: MagicDeepLinkTestModuleBundle.self)
