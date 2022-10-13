@@ -12,7 +12,7 @@
 	<key>EXAMPLE_ROUTER1</key>
 	<dict>
 		<key>testDeepLinkPushSection</key>
-		<string>MyViewController</string>
+		<string>MagicDeepLinkTestUIViewController</string>
 	</dict>
 	<key>EXAMPLE_ROUTER_WITH_PARAMETERS</key>
 	<dict>
