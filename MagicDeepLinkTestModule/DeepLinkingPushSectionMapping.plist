@@ -6,7 +6,7 @@
 	<dict/>
 	<key>MAIN_ROUTER</key>
 	<dict>
-                <key>developmentPushSection</key>
+                <key>developmentpushsection</key>
                 <string>MyViewController</string>
         </dict>
 	<key>EXAMPLE_ROUTER1</key>
