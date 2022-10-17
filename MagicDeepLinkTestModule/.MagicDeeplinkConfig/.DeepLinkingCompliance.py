@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-print("Hello World")
 
 
-#!/bin/bash
+
 import subprocess
 import os
 import re
@@ -85,6 +84,6 @@ class DeepLinkingCompliance:
         file = pathlib.Path(self.temporaryFileStorePath)
         file.unlink()
    '''
-
+print("Hello World")
 DeepLinkingCompliance()
 
