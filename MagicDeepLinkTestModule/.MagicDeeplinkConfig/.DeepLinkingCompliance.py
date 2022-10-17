@@ -84,6 +84,6 @@ class DeepLinkingCompliance:
         file = pathlib.Path(self.temporaryFileStorePath)
         file.unlink()
    '''
-print("Hello World")
+print("Hello")
 DeepLinkingCompliance()
 
