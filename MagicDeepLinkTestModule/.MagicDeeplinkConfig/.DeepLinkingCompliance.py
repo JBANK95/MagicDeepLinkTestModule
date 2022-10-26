@@ -25,7 +25,7 @@ class DeepLinkingCompliance:
         self.git_directory = subprocess.run(["pwd"], capture_output=True)
         
         print("======================")
-        print(self.git_directory.stdout.rstrip().decode("utf-8")
+        print(self.git_directory.stdout.rstrip().decode("utf-8"))
         print("======================")
        # self.git_branch_added_file_list = subprocess.Popen(["git", "-C", self.git_directory.stdout.rstrip(), "diff", "--line-prefix=`git rev-parse --show-toplevel`/", "--name-only", "--diff-filter=cdmrtuxb", "origin/main"], shell=True)
         #self.git_branch_added_file_list = subprocess.Popen("git -C %s diff --line-prefix=`git rev-parse --show-toplevel`/ --name-only --diff-filter=cdmrtuxb origin/main" %(self.git_directory.stdout.rstrip()), stdout=subprocess.PIPE, shell=True)
