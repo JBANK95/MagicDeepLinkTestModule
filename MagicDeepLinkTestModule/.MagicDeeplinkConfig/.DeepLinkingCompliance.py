@@ -25,19 +25,25 @@ class DeepLinkingCompliance:
         print("================================")
         print(self.git_branch_added_file_list)
         print("================================")
-        self.list_only_uma_only_files = subprocess.run(["grep", "UMA/UMA_Main"], input=self.git_branch_added_file_list.stdout, capture_output=True)
-        self.filter_swift_files_only = subprocess.run(["grep", ".*\\.swift$"], input=self.list_only_uma_only_files.stdout, capture_output=True)
+        self.filter_swift_files_only = subprocess.run(["grep", ".*\\.swift$"], input=self.git_branch_added_file_list.stdout, capture_output=True)
+        print("SWIFT FILES")
+        print(self.filter_swift_files_only)
         self.exclude_tests_files = subprocess.run(["grep", "-v", "Tests"], input=self.filter_swift_files_only.stdout, capture_output=True)
         self.store_output_in_file = subprocess.run(["tee", self.temporaryFileStorePath], input=self.exclude_tests_files.stdout, capture_output=True)
 
     # Get array from temporary files and access each file path
     def checkFilesForViewControllers(self):
         lines = []
-        print("cd ..")
+      
         with open(self.temporaryFileStorePath) as f:
             lines = f.readlines()
             self.deleteTempFile()
+            print("LINES")
+            print(lines)
             for line in lines:
+                print("++++++++++++++++++++++++++++")
+                print(line)
+                print("++++++++++++++++++++++++++++")
                 self.processFileForProtocolCompliance(line)
     
     # Each files which are added need to check that it is UIViewController or not and check for  that confirms Routing Protocol by using regex.
@@ -55,6 +61,7 @@ class DeepLinkingCompliance:
         if len(matches) > 0:
             self.compliantViewControllerNames.append(matches[0][0])
         else:
+            print("NOT COMPLIANT")
             patternCheckViewController = re.compile("class\s+(.*)\s*:(?=(.|\n)*UIViewController)(.|\n)*{")
             matchesCheckViewController = re.findall(patternCheckViewController, filetext)
             if len(matchesCheckViewController) > 0:
