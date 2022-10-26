@@ -21,29 +21,40 @@ class DeepLinkingCompliance:
     # This function will find new swift files on project by using git diff command. Basically it will differentiate files with UMA-Origin and store list of files in temporary file.
     def getAddedSwiftFilesOnProject(self):
         self.create_file = subprocess.run(["touch", self.temporaryFileStorePath])
-        self.git_branch_added_file_list = subprocess.run(["git", "diff", "--name-only", "--diff-filter=cdmrtuxb", "origin/main"], input=self.create_file.stdout, capture_output=True)
-        print("================================")
-        print(self.git_branch_added_file_list)
-        print("================================")
-        self.filter_swift_files_only = subprocess.run(["grep", ".*\\.swift$"], input=self.git_branch_added_file_list.stdout, capture_output=True)
-        print("SWIFT FILES")
-        print(self.filter_swift_files_only)
-        self.exclude_tests_files = subprocess.run(["grep", "-v", "Tests"], input=self.filter_swift_files_only.stdout, capture_output=True)
-        self.store_output_in_file = subprocess.run(["tee", self.temporaryFileStorePath], input=self.exclude_tests_files.stdout, capture_output=True)
+        
+        self.git_directory = subprocess.run(["pwd"], capture_output=True)
+        
+        print("======================")
+        print(self.git_directory.stdout.rstrip().decode("utf-8")
+        print("======================")
+       # self.git_branch_added_file_list = subprocess.Popen(["git", "-C", self.git_directory.stdout.rstrip(), "diff", "--line-prefix=`git rev-parse --show-toplevel`/", "--name-only", "--diff-filter=cdmrtuxb", "origin/main"], shell=True)
+        #self.git_branch_added_file_list = subprocess.Popen("git -C %s diff --line-prefix=`git rev-parse --show-toplevel`/ --name-only --diff-filter=cdmrtuxb origin/main" %(self.git_directory.stdout.rstrip()), stdout=subprocess.PIPE, shell=True)
+       
+        cmd = "git diff -C %s --line-prefix=`git rev-parse --show-toplevel`/ --name-only --diff-filter=cdmrtuxb origin/main" %(self.git_directory.stdout.rstrip().decode("utf-8"))
+        print(cmd)
+        p = subprocess.Popen(cmd, stdout = subprocess.PIPE, text=True, shell=True)
+   
+        self.git_branch_added_file_list, err = p.communicate()
+        self.git_branch_added_file_list = self.git_branch_added_file_list.splitlines()
+        self.final_swift_files = []
+        for file in self.git_branch_added_file_list:
+            if re.match(r".*.swift$", file):
+                if re.match(r"(?!Tests)", file):
+                    self.final_swift_files.append(file)
+      
+        with open(self.temporaryFileStorePath, 'w') as f:
+            for file_name in self.final_swift_files:
+                f.write(f"%s\n" %(file_name))
+
+       # self.store_output_in_file = subprocess.run(["tee", self.temporaryFileStorePath], input=self.exclude_tests_files.stdout, capture_output=True)
 
     # Get array from temporary files and access each file path
     def checkFilesForViewControllers(self):
         lines = []
-      
         with open(self.temporaryFileStorePath) as f:
             lines = f.readlines()
             self.deleteTempFile()
-            print("LINES")
-            print(lines)
             for line in lines:
-                print("++++++++++++++++++++++++++++")
-                print(line)
-                print("++++++++++++++++++++++++++++")
                 self.processFileForProtocolCompliance(line)
     
     # Each files which are added need to check that it is UIViewController or not and check for  that confirms Routing Protocol by using regex.
@@ -61,7 +72,6 @@ class DeepLinkingCompliance:
         if len(matches) > 0:
             self.compliantViewControllerNames.append(matches[0][0])
         else:
-            print("NOT COMPLIANT")
             patternCheckViewController = re.compile("class\s+(.*)\s*:(?=(.|\n)*UIViewController)(.|\n)*{")
             matchesCheckViewController = re.findall(patternCheckViewController, filetext)
             if len(matchesCheckViewController) > 0:
