@@ -10,26 +10,23 @@ import pathlib
 
 class DeepLinkingCompliance:
     def __init__(self):
-        self.temporaryFileStorePath = "AddedNewSwiftFilesList.txt"
+        self.temporaryFileStorePath = ".MagicDeeplinkConfig/AddedNewSwiftFilesList.txt"
         self.compliantViewControllerNames = []
         
         self.getAddedSwiftFilesOnProject()
-       # self.checkFilesForViewControllers()
-       # if len(self.compliantViewControllerNames) > 0:
-       #     self.checkInfoPlistForClassMapping()
+        self.checkFilesForViewControllers()
+        if len(self.compliantViewControllerNames) > 0:     
+            self.checkInfoPlistForClassMapping()
 
     # This function will find new swift files on project by using git diff command. Basically it will differentiate files with UMA-Origin and store list of files in temporary file.
     def getAddedSwiftFilesOnProject(self):
         self.create_file = subprocess.run(["touch", self.temporaryFileStorePath])
         self.git_branch_added_file_list = subprocess.run(["git", "diff", "--name-only", "--diff-filter=cdmrtuxb", "origin/main"], input=self.create_file.stdout, capture_output=True)
-        print("================================")
-        print(self.git_branch_added_file_list)
-        print("================================")
         self.list_only_uma_only_files = subprocess.run(["grep", "UMA/UMA_Main"], input=self.git_branch_added_file_list.stdout, capture_output=True)
         self.filter_swift_files_only = subprocess.run(["grep", ".*\\.swift$"], input=self.list_only_uma_only_files.stdout, capture_output=True)
         self.exclude_tests_files = subprocess.run(["grep", "-v", "Tests"], input=self.filter_swift_files_only.stdout, capture_output=True)
         self.store_output_in_file = subprocess.run(["tee", self.temporaryFileStorePath], input=self.exclude_tests_files.stdout, capture_output=True)
-'''    
+
     # Get array from temporary files and access each file path
     def checkFilesForViewControllers(self):
         lines = []
@@ -86,7 +83,7 @@ class DeepLinkingCompliance:
     def deleteTempFile(self):
         file = pathlib.Path(self.temporaryFileStorePath)
         file.unlink()
-   '''
+
 print("Hello")
 DeepLinkingCompliance()
 
