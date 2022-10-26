@@ -10,7 +10,7 @@ import pathlib
 
 class DeepLinkingCompliance:
     def __init__(self):
-        self.temporaryFileStorePath = ".MagicDeeplinkConfig/AddedNewSwiftFilesList.txt"
+        self.temporaryFileStorePath = "./AddedNewSwiftFilesList.txt"
         self.compliantViewControllerNames = []
         
         self.getAddedSwiftFilesOnProject()
@@ -22,6 +22,9 @@ class DeepLinkingCompliance:
     def getAddedSwiftFilesOnProject(self):
         self.create_file = subprocess.run(["touch", self.temporaryFileStorePath])
         self.git_branch_added_file_list = subprocess.run(["git", "diff", "--name-only", "--diff-filter=cdmrtuxb", "origin/main"], input=self.create_file.stdout, capture_output=True)
+        print("================================")
+        print(self.git_branch_added_file_list)
+        print("================================")
         self.list_only_uma_only_files = subprocess.run(["grep", "UMA/UMA_Main"], input=self.git_branch_added_file_list.stdout, capture_output=True)
         self.filter_swift_files_only = subprocess.run(["grep", ".*\\.swift$"], input=self.list_only_uma_only_files.stdout, capture_output=True)
         self.exclude_tests_files = subprocess.run(["grep", "-v", "Tests"], input=self.filter_swift_files_only.stdout, capture_output=True)
