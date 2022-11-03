@@ -2,13 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>FINAL_ROUTER</key>
+	<string></string>
+	<key>finalPushSectionTestName</key>
+	<string>NewViewController</string>
 	<key>TEST</key>
 	<dict/>
 	<key>MAIN_ROUTER</key>
 	<dict>
-                <key>developmentpushsection</key>
-                <string>MyViewController</string>
-        </dict>
+		<key>developmentpushsection</key>
+		<string>MyViewController</string>
+	</dict>
 	<key>EXAMPLE_ROUTER1</key>
 	<dict>
 		<key>testDeepLinkPushSection</key>
