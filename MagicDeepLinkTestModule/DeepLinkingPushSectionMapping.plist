@@ -30,5 +30,10 @@
 			<string>value2</string>
 		</dict>
 	</dict>
+	<key>MDTEST_TESTMODULE_ROUTER_1</key>
+	<dict>
+		<key>pushsectiontestmodule</key>
+		<string>TestModuleViewController</string>
+	</dict>
 </dict>
 </plist>

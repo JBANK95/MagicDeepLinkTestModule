@@ -1,4 +1,4 @@
-import ABMagicDeeplink
+import ABCoreComponent
 
 class NewViewController:UIViewController {
     

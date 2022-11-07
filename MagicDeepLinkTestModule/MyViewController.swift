@@ -1,5 +1,5 @@
 
-import ABMagicDeeplink
+import ABCoreComponent
 
 class MyViewController: UIViewController, RoutingProtocol {
     
