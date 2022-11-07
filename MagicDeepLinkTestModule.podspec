@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
   spec.swift_version = "5.3"
   spec.platform      =  :ios, "11.0"
   spec.static_framework = true
-  spec.dependency 'ABMagicDeeplink', '~> 1.0.6'
+  spec.dependency 'ABCoreComponent'
   spec.script_phases = [
     { :name => 'Precompile',
       :script => '${PODS_TARGET_SRCROOT}/MagicDeepLinkTestModule/.MagicDeeplinkConfig/.DeepLinkingCompliance.py',
