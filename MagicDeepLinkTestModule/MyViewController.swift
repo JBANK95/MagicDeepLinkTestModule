@@ -18,7 +18,7 @@ class MyViewController: UIViewController, RoutingProtocol {
      
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.green
         blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 100, height: 100))
         blackSquare.backgroundColor = UIColor.black
         view.addSubview(blackSquare)
