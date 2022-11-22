@@ -1,10 +1,11 @@
-
+import ABCoreComponent
 
 // Add to every module that's part of deep linking wherever the configuration or initialization is done
 // this will permit external classes to access underlying bundle resources.
-public final class MagicDeepLinkTestModuleBundle {
+// Copy/Paste and change the forResource name to the one defined in podspec
+public final class ModuleInitialization: DeepLinkingModuleConformance {
     public static let resourceBundle: Bundle = {
-        let myBundle = Bundle(for: MagicDeepLinkTestModuleBundle.self)
+        let myBundle = Bundle(for: ModuleInitialization.self)
 
         guard let resourceBundleURL = myBundle.url(
             forResource: "MagicDeepLinkTestModuleBundle", withExtension: "bundle")
@@ -17,7 +18,7 @@ public final class MagicDeepLinkTestModuleBundle {
     }()
 
      public static func getModuleRoutes() -> NSMutableDictionary? {
-        let moduleBundle = MagicDeepLinkTestModuleBundle.resourceBundle
+        let moduleBundle = ModuleInitialization.resourceBundle
         if let plistRouteFile = moduleBundle.path(forResource: "DeepLinkingPushSectionMapping", ofType: "plist") {
             print(NSMutableDictionary(contentsOfFile: plistRouteFile))
             return NSMutableDictionary(contentsOfFile: plistRouteFile)
